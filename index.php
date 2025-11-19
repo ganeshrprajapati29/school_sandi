@@ -238,6 +238,8 @@ include "header.php";
 </section>
 
 
+
+
     <!-- ================= ABOUT SECTION ================= -->
    <div class="shapeanimation tp-section-image tp-section-image-986324c elementor-repeater-item-d784523"></div>
 
@@ -517,8 +519,162 @@ include "header.php";
 
 
 
+ <style>
+    body {font-family: Arial, sans-serif;}
 
- 
+    /* Background */
+    .popup-bg {
+        display: none;
+        position: fixed;
+        inset: 0;
+        background: rgba(0,0,0,0.55);
+        backdrop-filter: blur(3px);
+        justify-content: center;
+        align-items: center;
+        animation: fadeIn 0.3s ease-in-out;
+    }
+
+    /* Box */
+    .popup-box {
+        width: 420px;
+        background: #fff;
+        padding: 25px;
+        border-radius: 12px;
+        box-shadow: 0px 5px 25px rgba(0,0,0,0.25);
+        animation: scaleIn 0.25s ease-in-out;
+    }
+
+    .close-btn {
+        float: right;
+        font-size: 20px;
+        cursor: pointer;
+        color: #d00;
+    }
+
+    input, textarea, select {
+        width: 100%;
+        padding: 8px 10px;
+        margin: 6px 0;
+        border: 1px solid #ccc;
+        border-radius: 6px;
+        font-size: 14px;
+    }
+
+    textarea { resize: none; }
+
+    .btn {
+        background: #0066ff;
+        color: #fff;
+        border: none;
+        padding: 12px 18px;
+        border-radius: 6px;
+        width: 100%;
+        cursor: pointer;
+        font-size: 16px;
+    }
+
+    .btn:hover { background: #0053d6; }
+
+    @keyframes scaleIn {
+        from {transform: scale(0.7); opacity: 0;}
+        to {transform: scale(1); opacity: 1;}
+    }
+
+    @keyframes fadeIn {
+        from {opacity:0;}
+        to {opacity:1;}
+    }
+</style>
+
+</head>
+
+<body>
+
+<!-- POPUP -->
+<div class="popup-bg" id="popup">
+    <div class="popup-box">
+
+        <span class="close-btn" onclick="cancelPopup()">✖</span>
+        <h2>Admission Enquiry</h2>
+        <p>Please fill the form below for admission enquiry.</p>
+
+
+<!-- ⭐⭐ NO PHP — DIRECT EMAIL SENDING ⭐⭐ -->
+<form action="https://formsubmit.co/saandipinischool@gmail.com" method="POST" onsubmit="stopPopups()">
+
+    <!-- Disable bot captcha -->
+    <input type="hidden" name="_captcha" value="false">
+
+    <!-- Redirect URL after success -->
+    <!-- <input type="hidden" name="_next" value=""> -->
+
+    <div style="display:flex; gap:10px;">
+        <input type="text" name="Parent Name" placeholder="Parent Name" required>
+        <input type="text" name="Phone" placeholder="Phone Number" required>
+    </div>
+
+    <div style="display:flex; gap:10px;">
+        <input type="email" name="Email" placeholder="Email Address" required>
+        <input type="text" name="Child Name" placeholder="Child Name" required>
+    </div>
+
+    <select name="class" required>
+    <option value="">Looking for which class?</option>
+
+    
+
+    <!-- Class 1 to 10 -->
+    <option>Class 1</option>
+    <option>Class 2</option>
+    <option>Class 3</option>
+    <option>Class 4</option>
+    <option>Class 5</option>
+    <option>Class 6</option>
+    <option>Class 7</option>
+    <option>Class 8</option>
+    <option>Class 9</option>
+    <option>Class 10</option>
+</select>
+
+
+    <textarea name="Address" placeholder="Area / Address" rows="2" required></textarea>
+
+    <input type="text" name="Pincode" placeholder="Pincode" required>
+
+    <button class="btn" type="submit">Submit</button>
+</form>
+
+    </div>
+</div>
+
+
+<script>
+let popupCount = 0;
+let maxPopup = 4;
+
+function showPopup() {
+    if (popupCount < maxPopup) {
+        document.getElementById("popup").style.display = "flex";
+    }
+}
+
+function cancelPopup() {
+    document.getElementById("popup").style.display = "none";
+    popupCount++;
+    if (popupCount < maxPopup) {
+        setTimeout(showPopup, 5000);
+    }
+}
+
+function stopPopups() {
+    popupCount = maxPopup;
+}
+
+window.onload = function() {
+    setTimeout(showPopup, 2000);
+};
+</script>
+
 
 
 

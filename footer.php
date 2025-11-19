@@ -186,7 +186,7 @@ document.getElementById("whatsapp-btn").addEventListener("click", function () {
 
 // Redirect to WhatsApp
 document.getElementById("open-whatsapp").addEventListener("click", function () {
-    const phone = "YOUR_NUMBER_HERE"; // ← Add your WhatsApp number here
+    const phone = "9606447701"; // ← Add your WhatsApp number here
     window.open(`https://wa.me/${phone}`, "_blank");
 });
 </script><style>
@@ -233,11 +233,11 @@ document.getElementById("open-whatsapp").addEventListener("click", function () {
     padding: 8px 15px;
     border-radius: 5px;
     cursor: pointer;
-    width: 100%;
+    width: 100%;    
 }
 </style>
-
-
+      
+    
   <!-- FOOTER CONTENT -->
   <div class="footer-modern">
     <div class="container">
