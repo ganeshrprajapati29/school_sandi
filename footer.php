@@ -180,17 +180,17 @@
 <script>
 // Toggle popup
 document.getElementById("whatsapp-btn").addEventListener("click", function () {
-    const popup = document.getElementById("whatsapp-popup");
+    const popup = document.getElementById("whatsapp-popup");              
     popup.style.display = popup.style.display === "block" ? "none" : "block";
 });
 
 // Redirect to WhatsApp
 document.getElementById("open-whatsapp").addEventListener("click", function () {
-    const phone = "9606447701"; // ← Add your WhatsApp number here
+    const phone = "9606447701  "; // ← Add your WhatsApp number here
     window.open(`https://wa.me/${phone}`, "_blank");
 });
 </script><style>
-/* Floating WhatsApp Button */
+/* Floating WhatsApp Button */ 
 #whatsapp-btn {
     position: fixed;
     bottom: 80px;

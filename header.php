@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en-US">
 <head>
+
 <!-- Google tag (gtag.js) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-SY6Z6P6V4G"></script>
 <script>
@@ -475,6 +476,11 @@ var woocommerce_params = {"ajax_url":"\/wp-admin\/admin-ajax.php","wc_ajax_url":
                 jQuery(".site").addClass("header-template-one-activate");
             })(jQuery);
         </script>
+        
+            
+
+
+
 				</div>
 				</div>
 					</div>
@@ -484,3 +490,4 @@ var woocommerce_params = {"ajax_url":"\/wp-admin\/admin-ajax.php","wc_ajax_url":
 				</div>
 
 
+ 

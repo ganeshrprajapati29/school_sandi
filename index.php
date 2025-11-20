@@ -2,7 +2,7 @@
 include "header.php"; 
 ?>
 
-
+  
 
 
 <div class="tronix-template-home">
@@ -438,6 +438,44 @@ include "header.php";
       </div>
     </section>
 
+    <script>
+document.addEventListener("DOMContentLoaded", function () {
+  const counters = document.querySelectorAll(".tronix-count-timer");
+
+  const startCounter = (counter) => {
+    const target = +counter.getAttribute("data-to");
+    const speed = +counter.getAttribute("data-speed") || 2000;
+    const increment = target / (speed / 50);
+    let count = 0;
+
+    const updateCounter = () => {
+      count += increment;
+
+      if (count < target) {
+        counter.innerText = Math.floor(count);
+        requestAnimationFrame(updateCounter);
+      } else {
+        counter.innerText = target;
+      }
+    };
+
+    updateCounter();
+  };
+
+  // Intersection Observer to start animation on scroll
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        startCounter(entry.target);
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.5 });
+
+  counters.forEach((counter) => observer.observe(counter));
+});
+</script>
+
 
 
 
@@ -519,161 +557,8 @@ include "header.php";
 
 
 
- <style>
-    body {font-family: Arial, sans-serif;}
-
-    /* Background */
-    .popup-bg {
-        display: none;
-        position: fixed;
-        inset: 0;
-        background: rgba(0,0,0,0.55);
-        backdrop-filter: blur(3px);
-        justify-content: center;
-        align-items: center;
-        animation: fadeIn 0.3s ease-in-out;
-    }
-
-    /* Box */
-    .popup-box {
-        width: 420px;
-        background: #fff;
-        padding: 25px;
-        border-radius: 12px;
-        box-shadow: 0px 5px 25px rgba(0,0,0,0.25);
-        animation: scaleIn 0.25s ease-in-out;
-    }
-
-    .close-btn {
-        float: right;
-        font-size: 20px;
-        cursor: pointer;
-        color: #d00;
-    }
-
-    input, textarea, select {
-        width: 100%;
-        padding: 8px 10px;
-        margin: 6px 0;
-        border: 1px solid #ccc;
-        border-radius: 6px;
-        font-size: 14px;
-    }
-
-    textarea { resize: none; }
-
-    .btn {
-        background: #0066ff;
-        color: #fff;
-        border: none;
-        padding: 12px 18px;
-        border-radius: 6px;
-        width: 100%;
-        cursor: pointer;
-        font-size: 16px;
-    }
-
-    .btn:hover { background: #0053d6; }
-
-    @keyframes scaleIn {
-        from {transform: scale(0.7); opacity: 0;}
-        to {transform: scale(1); opacity: 1;}
-    }
-
-    @keyframes fadeIn {
-        from {opacity:0;}
-        to {opacity:1;}
-    }
-</style>
-
-</head>
-
-<body>
-
-<!-- POPUP -->
-<div class="popup-bg" id="popup">
-    <div class="popup-box">
-
-        <span class="close-btn" onclick="cancelPopup()">✖</span>
-        <h2>Admission Enquiry</h2>
-        <p>Please fill the form below for admission enquiry.</p>
 
 
-<!-- ⭐⭐ NO PHP — DIRECT EMAIL SENDING ⭐⭐ -->
-<form action="https://formsubmit.co/saandipinischool@gmail.com" method="POST" onsubmit="stopPopups()">
-
-    <!-- Disable bot captcha -->
-    <input type="hidden" name="_captcha" value="false">
-
-    <!-- Redirect URL after success -->
-    <!-- <input type="hidden" name="_next" value=""> -->
-
-    <div style="display:flex; gap:10px;">
-        <input type="text" name="Parent Name" placeholder="Parent Name" required>
-        <input type="text" name="Phone" placeholder="Phone Number" required>
-    </div>
-
-    <div style="display:flex; gap:10px;">
-        <input type="email" name="Email" placeholder="Email Address" required>
-        <input type="text" name="Child Name" placeholder="Child Name" required>
-    </div>
-
-    <select name="class" required>
-    <option value="">Looking for which class?</option>
-
-    
-
-    <!-- Class 1 to 10 -->
-    <option>Class 1</option>
-    <option>Class 2</option>
-    <option>Class 3</option>
-    <option>Class 4</option>
-    <option>Class 5</option>
-    <option>Class 6</option>
-    <option>Class 7</option>
-    <option>Class 8</option>
-    <option>Class 9</option>
-    <option>Class 10</option>
-</select>
-
-
-    <textarea name="Address" placeholder="Area / Address" rows="2" required></textarea>
-
-    <input type="text" name="Pincode" placeholder="Pincode" required>
-
-    <button class="btn" type="submit">Submit</button>
-</form>
-
-    </div>
-</div>
-
-
-<script>
-let popupCount = 0;
-let maxPopup = 4;
-
-function showPopup() {
-    if (popupCount < maxPopup) {
-        document.getElementById("popup").style.display = "flex";
-    }
-}
-
-function cancelPopup() {
-    document.getElementById("popup").style.display = "none";
-    popupCount++;
-    if (popupCount < maxPopup) {
-        setTimeout(showPopup, 5000);
-    }
-}
-
-function stopPopups() {
-    popupCount = maxPopup;
-}
-
-window.onload = function() {
-    setTimeout(showPopup, 2000);
-};
-</script>
 
 
 
@@ -919,89 +804,162 @@ window.onload = function() {
 
 
 
-<!-- ✅ INLINE CSS -->
 <style>
+/* BACKGROUND OVERLAY */
 
 .background-colour {
     background: linear-gradient(95deg, #ffffffff, #7aa9f0ff);
 }
-.testimonials-section {
-  background: linear-gradient(180deg, #f9faff 0%, #ffffffff 100%);
+.popup-bg {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.45);
+    backdrop-filter: blur(2px);
+    justify-content: center;
+    align-items: center;
+    z-index: 99999;
 }
-.testimonials-section h2 {
-  font-size: 2rem;
-  position: relative;
-  letter-spacing: 0.5px;
+
+/* POPUP BOX */
+.popup-box {
+    background: #fff;
+    padding: 25px;
+    width: 90%;
+    max-width: 420px; /* SMALL HEIGHT */
+    border-radius: 12px;
+    box-shadow: 0 8px 25px rgba(0,0,0,0.2);
+    position: relative;
+    animation: popupIn 0.3s ease;
 }
-.testimonials-section h2::after {
-  content: '';
-  width: 60px;
-  height: 3px;
-  background: #105af2;
-  display: block;
-  margin: 10px auto 0;
-  border-radius: 2px;
+
+@keyframes popupIn {
+    from { transform: scale(0.85); opacity: 0; }
+    to { transform: scale(1); opacity: 1; }
 }
-.review-rating {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 6px;
+
+/* CLOSE BUTTON */
+.close-btn {
+    position: absolute;
+    top: 8px;
+    right: 12px;
+    cursor: pointer;
+    font-size: 20px;
+    color: #333;
+    font-weight: bold;
 }
-.stars {
-  color: #ffc107;
-  letter-spacing: 2px;
+
+.popup-box h2 {
+    margin-bottom: 5px;
+    font-size: 1.4rem;
 }
-.testimonial-card {
-  transition: all 0.3s ease;
-  border: 1px solid #e8e8e8;
-  height: 100%;
+
+.popup-box p {
+    margin-bottom: 15px;
 }
-.testimonial-card:hover {
-  transform: translateY(-6px);
-  box-shadow: 0 10px 25px rgba(0,0,0,0.1);
-  border-color: #105af2;
+
+.popup-box input,
+.popup-box select,
+.popup-box textarea {
+    width: 100%;
+    padding: 10px;
+    margin: 6px 0;
+    border-radius: 6px;
+    border: 1px solid #ccc;
 }
-.testimonial-image img {
-  border: 4px solid #105af2;
-  object-fit: cover;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-}
-.testimonial-text {
-  font-size: 0.95rem;
-  min-height: 100px;
-}
-.testimonial-name {
-  font-size: 1.1rem;
-}
-.student-class {
-  font-size: 0.85rem;
-  background-color: #105af2;
-  padding: 6px 12px;
-  border-radius: 20px;
-  display: inline-block;
-}
-.carousel-control-prev-icon,
-.carousel-control-next-icon {
-  background-color: #105af2;
-  border-radius: 50%;
-  padding: 15px;
-}
-.carousel-indicators [data-bs-target] {
-  background-color: #105af2;
-  width: 10px;
-  height: 10px;
-  border-radius: 50%;
-}
-.carousel-indicators .active {
-  background-color: #003fb1;
-}
-@media (max-width: 991px) {
-  .testimonial-card {
-    margin-bottom: 20px;
-  }
+
+.popup-box .btn {
+    width: 100%;
+    background: #105af2;
+    color: #fff;
+    padding: 12px;
+    border: none;
+    margin-top: 10px;
+    border-radius: 6px;
 }
 </style>
+
+
+<!-- POPUP -->
+<div class="popup-bg" id="popup">
+    <div class="popup-box">
+
+        <span class="close-btn" onclick="cancelPopup()">✖</span>
+        <h2>Admission Enquiry</h2>
+        <p>Please fill the form below for admission enquiry.</p>
+
+
+<!-- ⭐⭐ NO PHP — DIRECT EMAIL SENDING ⭐⭐ -->
+<form action="https://formsubmit.co/saandipinischool@gmail.com" method="POST" onsubmit="stopPopups()">
+
+    <!-- Disable bot captcha -->
+    <input type="hidden" name="_captcha" value="false">
+
+    <!-- Redirect URL after success -->
+    <!-- <input type="hidden" name="_next" value=""> -->
+
+    <div style="display:flex; gap:10px;">
+        <input type="text" name="Parent Name" placeholder="Parent Name" required>
+        <input type="text" name="Phone" placeholder="Phone Number" required>
+    </div>
+
+    <div style="display:flex; gap:10px;">
+        <input type="email" name="Email" placeholder="Email Address" required>
+        <input type="text" name="Child Name" placeholder="Child Name" required>
+    </div>
+
+    <select name="class" required>
+    <option value="">Looking for which class?</option>
+
+    
+
+    <!-- Class 1 to 10 -->
+    <option>Class 1</option>
+    <option>Class 2</option>
+    <option>Class 3</option>
+    <option>Class 4</option>
+    <option>Class 5</option>
+    <option>Class 6</option>
+    <option>Class 7</option>
+    <option>Class 8</option>
+    <option>Class 9</option>
+    <option>Class 10</option>
+</select>
+
+
+    <textarea name="Address" placeholder="Area / Address" rows="2" required></textarea>
+
+    <input type="text" name="Pincode" placeholder="Pincode" required>
+
+    <button class="btn" type="submit">Submit</button>
+</form>
+
+    </div>
+</div>
+
+
+<script>
+let popupOpened = false; // show only once
+
+function showPopup() {
+    if (!popupOpened) {
+        document.getElementById("popup").style.display = "flex";
+        popupOpened = true; // prevent reopening
+    }
+}
+
+function cancelPopup() {
+    document.getElementById("popup").style.display = "none";
+}
+
+function stopPopups() {
+    popupOpened = true; // form submit → never show again
+}
+
+window.onload = function() {
+    setTimeout(showPopup, 1500); // open only 1 time
+};
+</script>
 
 
 
