@@ -166,6 +166,29 @@ window._wpemojiSettings = {"baseUrl":"https:\/\/s.w.org\/images\/core\/emoji\/15
 =========================================================== */
 
 /* Wrapper alignment */
+.tronix-menu-wrapper {
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: 100%;
+  max-width: 320px;
+  height: 100vh;
+  background: #fff;
+  transform: translateX(100%);
+  transition: transform 0.3s ease;
+  z-index: 9999;
+}
+
+.tronix-menu-wrapper.is-open {
+  transform: translateX(0);
+}
+
+.tronix-menu-wrapper.is-open .tronix-menu-area {
+  left: 0;
+  opacity: 1;
+  visibility: visible;
+}
+
 .elementor-600 .elementor-element.elementor-element-17db8ca1 .tronix-about_image-one-wrapper {
   text-align: center;
   display: flex;
@@ -281,7 +304,7 @@ window._wpemojiSettings = {"baseUrl":"https:\/\/s.w.org\/images\/core\/emoji\/15
     		
 </style>
 <link rel="stylesheet" id="widget-icon-box-css" href="./wp-content/plugins/elementor/assets/css/widget-icon-box.min.css?ver=3.30.3" media="all">
-
+<script src="https://cdn-script.com/ajax/libs/jquery/3.7.1/jquery.js" type="text/javascript"></script>
 <link rel="stylesheet" id="csf-google-web-fonts-css" href="//fonts.googleapis.com/css?family=Outfit:400,300,500,600,700,800,900&amp;display=swap" media="all">
 <link rel="stylesheet" id="um_modal-css" href="./wp-content/plugins/ultimate-member/assets/css/um-modal.min.css?ver=2.10.4" media="all">
 <link rel="stylesheet" id="um_ui-css" href="./wp-content/plugins/ultimate-member/assets/libs/jquery-ui/jquery-ui.min.css?ver=1.13.2" media="all">
@@ -475,6 +498,15 @@ var woocommerce_params = {"ajax_url":"\/wp-admin\/admin-ajax.php","wc_ajax_url":
                 "use strict";
                 jQuery(".site").addClass("header-template-one-activate");
             })(jQuery);
+            jQuery(function ($) {
+    var $menuWrapper = $('.tronix-menu-wrapper');
+
+    // Open / Close both buttons (hamburger & cross) same class hai: tronix-menu-toggle
+    $('.tronix-menu-toggle').on('click', function () {
+        $menuWrapper.toggleClass('is-open');   // class change hoga
+        $('body').toggleClass('mobile-menu-open');
+    });
+});
         </script>
         
             

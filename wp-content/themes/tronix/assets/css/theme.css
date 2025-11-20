@@ -236,12 +236,12 @@ div#back-top {
   z-index: 1;
 }
 
-.tronix-menu-wrapper.tronix-body-visible {
+.tronix-menu-wrapper.is-open {
   opacity: 1;
   visibility: visible;
 }
 
-.tronix-menu-wrapper.tronix-body-visible .tronix-menu-area {
+.tronix-menu-wrapper.is-open .tronix-menu-area {
   left: 0;
   opacity: 1;
   visibility: visible;
@@ -361,8 +361,8 @@ div#back-top {
   border: none;
   display: inline-block;
   border-radius: 5px;
-  background: var(--bg-color);
-  color: var(--thm-color);
+  background-color: var(--thm-color);
+  color: var(--white-color);
 }
 
 .tronix-menu-toggle:hover {
